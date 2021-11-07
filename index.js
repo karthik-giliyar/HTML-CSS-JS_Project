@@ -17,7 +17,11 @@ window.onload=function(){
     ];
     if (localStorage.getItem("students") == null) {
         localStorage.setItem("students", JSON.stringify(initialstudents));
-      };
+    };
+    
+    display();
+    
+
 };
 
 
@@ -28,31 +32,29 @@ function display(content = undefined){
 
     if (content == undefined) {
         students = JSON.parse(localStorage.getItem("students"));
-      } else {
+    } else {
         students = content;
-      };
+    };
 
     
-      students.forEach(function(student,index){
-            let data=` <tr>
-             <td class="btn1">${index+1}</td>
-             <td class="btn1">${student.name}</td>
-             <td class="btn1">${student.email}</td>
-             <td class="btn1">${student.mobile}</td>
-             <td><button class="btn" onclick="dlt(${index})">Delete</button>
-             <button class="btn" onclick="showmodal(${index})">Update</button></td>
-            </tr>`
+    students.forEach(function(student,index){
+        let data=` <tr>
+            <td class="btn1">${index+1}</td>
+            <td class="btn1">${student.name}</td>
+            <td class="btn1">${student.email}</td>
+            <td class="btn1">${student.mobile}</td>
+            <td><button class="btn" onclick="dlt(${index})">Delete</button>
+            <button class="btn" onclick="showmodal(${index})">Update</button></td>
+        </tr>`
 
-         totaldata+=data;
-     });
+        totaldata+=data;
+    });
 
-     document.getElementsByClassName("tbody")[0].innerHTML=totaldata;
-
-
+    document.getElementsByClassName("tbody")[0].innerHTML=totaldata;
 
 };
 
-display();
+
 
 
 function add(e){
@@ -88,11 +90,11 @@ function searchByName() {
     let searchValue = document.getElementById("searchName").value;
     let students = JSON.parse(localStorage.getItem("students"));
     let newdata = students.filter(function (superhero) {
-      return (
+    return (
         superhero.name.toUpperCase().indexOf(searchValue.toUpperCase()) != -1
-      );
+        );
     });
-  
+
     display(newdata);
 };
 
@@ -106,8 +108,8 @@ function showmodal(index) {
 
 function hideModal(e){
     if(e.target.className=="modal"){
-         let updatebtn=document.getElementsByClassName("modal")[0];
-         updatebtn.style.display="none"
+        let updatebtn=document.getElementsByClassName("modal")[0];
+        updatebtn.style.display="none"
     }
 }
 
@@ -116,6 +118,7 @@ function copydata(index){
     updateIndex=index;
     let students=JSON.parse(localStorage.getItem("students"));
     let student=students[index];
+
     document.getElementById("upb11").value=student.name
     document.getElementById("upb12").value=student.email
     document.getElementById("upb13").value=student.mobile
@@ -139,7 +142,7 @@ function updateall(event){
 
     display();
     let updatebtn=document.getElementsByClassName("modal")[0];
-         updatebtn.style.display="none"
+        updatebtn.style.display="none"
     
 };
 function dlt(index){
